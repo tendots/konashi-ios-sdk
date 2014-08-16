@@ -53,6 +53,8 @@
 - (void) ready
 {
     NSLog(@"READY");
+    [Konashi pinMode:LED2 mode:OUTPUT];
+    //[Konashi digitalWrite:LED2 value:HIGH];
     
     self.statusMessage.hidden = FALSE;
     
@@ -68,7 +70,7 @@
     
     [Konashi i2cStartCondition];
     [NSThread sleepForTimeInterval:0.01];
-    [Konashi i2cWrite:2 data:t address:0b1010000];  // slaver address could only set to 1010000
+    [Konashi i2cWrite:2 data:t address:0x70];  // slaver address could only set to 1010000
     [NSThread sleepForTimeInterval:0.01];
     [Konashi i2cStopCondition];
     [NSThread sleepForTimeInterval:0.01];
@@ -83,7 +85,7 @@
     
     [Konashi i2cStartCondition];
     [NSThread sleepForTimeInterval:0.01];
-    [Konashi i2cWrite:2 data:t address:0b1010000];  // slaver address could only set to 1010000
+    [Konashi i2cWrite:2 data:t address:0x70];  // slaver address could only set to 1010000
     [NSThread sleepForTimeInterval:0.01];
     [Konashi i2cStopCondition];
     [NSThread sleepForTimeInterval:0.01];
@@ -91,24 +93,24 @@
 
 - (void) initLcd
 {
-    [self writeCmd:0x01];           // clear display
-    [self writeCmd:0x38];           // 8bit 2lines
-    [self writeCmd:0x0f];           // set display, cursor, blink on/off
-    [self writeCmd:0x06];           // entry mode
-    [self writeCmd:0x08 | 0x04];    // 0x0c: display ON
+    //[self writeCmd:0x01];           // clear display
+    //[self writeCmd:0x38];           // 8bit 2lines
+    //[self writeCmd:0x0f];           // set display, cursor, blink on/off
+    //[self writeCmd:0x06];           // entry mode
+    //[self writeCmd:0x08 | 0x04];    // 0x0c: display ON
 
     [NSThread sleepForTimeInterval:0.1];
     
     [self writeCmd:0x80];           // set DDRAM address (position 00)
     
-    [self writeData:'D'];
-    [self writeData:'O'];
-    [self writeData:'W'];
-    [self writeData:'N'];
-    [self writeData:'L'];
-    [self writeData:'O'];
-    [self writeData:'A'];
-    [self writeData:'D'];
+//    [self writeData:'D'];
+//    [self writeData:'O'];
+//    [self writeData:'W'];
+//    [self writeData:'N'];
+//    [self writeData:'L'];
+//    [self writeData:'O'];
+//    [self writeData:'A'];
+//    [self writeData:'D'];
 }
 
 @end
